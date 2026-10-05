@@ -97,8 +97,10 @@
 .compass__tab--w .compass__dir { writing-mode: horizontal-tb; transform: rotate(90deg); }
 .compass__tab--w .compass__dir { transform: rotate(-90deg); }
 
-/* without JS the regions are plain anchors and every panel is visible */
+/* without JS the regions are plain anchors and every panel is visible;
+   with JS, only one panel exists visually from the first paint */
 .menu:not(.is-tabs) .panel + .panel { margin-top: 18vh; }
+.js .menu:not(.is-tabs) .panel + .panel { display: none; }
 
 /* --------------------------------------------------------------------------
    Panel
@@ -130,7 +132,7 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-.panel__title [data-fit] { display: block; font-size: clamp(4rem, 13vw, 15rem); }
+.panel__title [data-fit] { display: block; font-size: clamp(3rem, 8.5vw, 10rem); }
 .panel--dondurma .panel__title { font-stretch: 125%; }
 .panel--tatli .panel__title {
   font-family: var(--font-serif);

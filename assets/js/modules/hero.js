@@ -43,7 +43,8 @@ export async function initHero(root) {
 
   // ---- WebGL --------------------------------------------------------------
   let renderer = null;
-  const canUseGL = !reduce && !saveData() && 'WebGL2RenderingContext' in window;
+  // data-hero-static on the section keeps the poster (e.g. once a real photo replaces it)
+  const canUseGL = !reduce && !saveData() && !root.hasAttribute('data-hero-static') && 'WebGL2RenderingContext' in window;
 
   const light = { x: 0, y: 0, tx: 0, ty: 0 };
   let scale = isMobile() ? 0.5 : 0.72;

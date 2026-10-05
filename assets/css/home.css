@@ -64,7 +64,7 @@
   letter-spacing: -0.03em;
   white-space: nowrap;
   text-align: center;
-  font-size: 19.5vw; /* pre-fit estimate, refined by fit.js */
+  font-size: 17vw; /* pre-fit estimate, refined by fit.js */
   transform: translate3d(0, calc(var(--p) * -16vh), 0) scale(calc(1 + var(--p) * 0.14));
   transform-origin: 50% 60%;
 }
@@ -883,7 +883,8 @@
     font-size: 40vw;
     line-height: 0.78;
   }
-  .hero__line { display: block; white-space: nowrap; }
+  .hero__line { display: block; white-space: nowrap; font-size: 27vw; }
+  .hero__line:first-child { font-size: 44vw; }
   .hero__line + .hero__line { margin-top: 0.04em; }
   .hero__tagline { align-self: flex-start; margin-top: 16px; font-size: 1.5rem; }
   .hero__meta { display: none; }

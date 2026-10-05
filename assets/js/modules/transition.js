@@ -26,7 +26,12 @@ export function initTransition() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
       curtain.classList.add('is-out');
       curtain.classList.remove('is-cover');
-      curtain.addEventListener('transitionend', () => curtain.classList.remove('is-out'), { once: true });
+      const clear = (ev) => {
+        if (ev.target !== curtain) return;
+        curtain.removeEventListener('transitionend', clear);
+        curtain.classList.remove('is-out');
+      };
+      curtain.addEventListener('transitionend', clear);
     }));
   }
 
@@ -46,7 +51,12 @@ export function initTransition() {
     curtain.classList.add('is-in');
     let done = false;
     const go = () => { if (!done) { done = true; location.href = url.href; } };
-    curtain.addEventListener('transitionend', go, { once: true });
+    const onEnd = (ev) => {
+      if (ev.target !== curtain || ev.propertyName !== 'clip-path') return;
+      curtain.removeEventListener('transitionend', onEnd);
+      go();
+    };
+    curtain.addEventListener('transitionend', onEnd);
     setTimeout(go, 900);
   });
 
