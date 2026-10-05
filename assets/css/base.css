@@ -33,9 +33,10 @@
 :root {
   /* Palette — derived from the product itself: the toasted batter, the
      bitter chocolate, the cream, and one sharp pistachio signal. */
-  --night: #0d0907;
-  --night-2: #16100c;
-  --night-3: #221812;
+  /* "Night" is bitter chocolate, not black: the brand is a dessert, not a bar. */
+  --night: #1c100a;
+  --night-2: #26170e;
+  --night-3: #332013;
   --cream: #f2e9da;
   --cream-2: #e8dcc8;
   --ink: #120c08;
@@ -43,6 +44,8 @@
   --gold-deep: #b9761f;
   --gold-ink: #7d4b0e;   /* gold for small text on cream (AA) */
   --pistachio: #a9b95a;
+  --pistachio-field: #b5c46a; /* the ÜÇ TOP post ground */
+  --strawberry: #e0705a;
   --line-dark: rgba(242, 233, 218, 0.16);
   --line-light: rgba(18, 12, 8, 0.16);
 
@@ -539,7 +542,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   white-space: nowrap;
   text-align: center;
   font-size: 15vw;
-  transform: translateY(0.06em);
+  padding-bottom: 0.04em;
 }
 .finale__cup {
   position: absolute;

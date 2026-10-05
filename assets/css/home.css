@@ -137,7 +137,7 @@
   animation: none;
 }
 
-/* words that pass in front of the product: outlined, so the waffle shows through */
+/* words that pass in front of the product: solid caramel, like a label slapped on the cup */
 .hero__pass {
   position: absolute;
   inset: 0;
@@ -155,8 +155,8 @@
   line-height: 0.8;
   letter-spacing: -0.03em;
   white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(242, 233, 218, 0.9);
+  color: var(--gold);
+  text-shadow: 0 0.04em 0 var(--gold-deep);
   transform: translate3d(calc((1 - var(--t)) * 100vw - var(--t) * 100%), -50%, 0);
   will-change: transform;
 }
@@ -291,7 +291,7 @@
 
 /* Nº01 — WAFFLE: the product bleeds off the left edge, its name stands up on the right */
 .scene--waffle {
-  min-height: 120vh;
+  min-height: 100vh;
   grid-template-rows: 1fr auto auto 1fr;
   background:
     radial-gradient(60vw 60vw at 20% 50%, rgba(169, 185, 90, 0.07), transparent 62%),
@@ -380,8 +380,12 @@
   min-height: 120vh;
   grid-template-rows: 1fr auto;
   align-items: center;
-  background: var(--night);
+  background: var(--pistachio-field);
+  color: var(--ink);
 }
+.scene--scoops .scene__no span:first-child,
+.scene--scoops .scene__price { color: var(--ink); }
+.scene--scoops .marquee:not(.marquee--outline) .marquee__track span { color: var(--cream); }
 .scene__streams {
   position: absolute;
   inset: 0;
@@ -408,8 +412,7 @@
   text-transform: uppercase;
 }
 .marquee--outline .marquee__track span {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--gold);
+  color: var(--strawberry);
   font-stretch: 125%;
 }
 .scene__media--scoops {
@@ -436,13 +439,13 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 4px;
-  color: rgba(242, 233, 218, 0.6);
+  color: rgba(18, 12, 8, 0.7);
 }
 .scene__hint-dot {
   flex: none;
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--pistachio);
+  background: var(--strawberry);
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
@@ -626,7 +629,7 @@
   letter-spacing: -0.045em;
   text-transform: uppercase;
 }
-.story__lines .line:nth-child(n + 4) > span { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.story__lines .line:nth-child(n + 4) > span { color: var(--gold-deep); }
 .story__serif {
   grid-column: 1 / span 7;
   margin-top: 8vh;
@@ -886,10 +889,11 @@
   .hero__line { display: block; white-space: nowrap; font-size: 27vw; }
   .hero__line:first-child { font-size: 44vw; }
   .hero__line + .hero__line { margin-top: 0.04em; }
-  .hero__tagline { align-self: flex-start; margin-top: 16px; font-size: 1.5rem; }
+  .hero__title { z-index: 3; }
+  .hero__tagline { align-self: flex-start; margin-top: 16px; font-size: 1.5rem; text-shadow: 0 2px 18px var(--night); }
   .hero__meta { display: none; }
   .hero__cats { display: none; }
-  .hero__pass span { top: 60%; font-size: 34vw; -webkit-text-stroke-width: 1.2px; }
+  .hero__pass span { top: 60%; font-size: 34vw;  }
   .hero__beats { left: var(--m); right: var(--m); width: auto; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); height: 5.5em; }
   .hero__beat p { font-size: 1.05rem; max-width: 26ch; }
   .hero__cta { left: var(--m); right: var(--m); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
@@ -922,7 +926,9 @@
   .scene__media--cup { order: 2; width: 86vw; align-self: center; margin-top: -22vw; }
   .scene__stamp { display: none; }
 
-  .scene--scoops { padding-top: 40px; }
+  .scene--scoops { padding-top: 40px; align-items: stretch; }
+  .scene--scoops .scene__info, .scene--scoops .scene__hint { align-self: stretch; }
+  .scene--scoops .scene__info { margin-top: 13vw !important; }
   .scene__streams { position: relative; inset: auto; order: 1; margin: 0 calc(-1 * var(--m)); }
   .marquee__track span { font-size: 22vw; }
   .scene__media--scoops { order: 2; width: 82vw; align-self: center; margin-top: -26vw; }
@@ -973,7 +979,7 @@
   .post--a, .post--e { width: 72vw; }
   .post--b, .post--d, .post--g { width: 64vw; }
   .post--c, .post--f { width: 52vw; }
-  .post__ui { opacity: 1; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.7)); }
+  .post__ui { opacity: 1; justify-content: flex-end; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.7)); }
   .post__top { display: none; }
   .post__bottom { transform: none; }
   .post__icons { display: none; }
