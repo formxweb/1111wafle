@@ -1,0 +1,15 @@
+{
+  "name": "cupistan-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CUPISTAN — dijital marka deneyimi. Statik site; derleme adımı gerektirmez.",
+  "type": "module",
+  "scripts": {
+    "serve": "node tools/serve.mjs",
+    "render": "node tools/render/render.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.56.0",
+    "sharp": "^0.34.4"
+  }
+}

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>CUPISTAN compositions</title>
+<style>
+  @font-face { font-family: "Archivo"; src: url("../../assets/fonts/archivo-var.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; }
+  @font-face { font-family: "Bodoni Moda"; src: url("../../assets/fonts/bodoni-moda-italic-var.woff2") format("woff2"); font-weight: 400 900; font-style: italic; }
+  :root { --night:#0d0907; --night2:#16100c; --cream:#f2e9da; --ink:#120c08; --gold:#e3a13a; --pist:#a9b95a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Archivo", sans-serif; -webkit-font-smoothing: antialiased; }
+  .art { position: relative; overflow: hidden; display: none; }
+  .art.on { display: block; }
+  .art img { position: absolute; display: block; }
+  .grain::after { content: ""; position: absolute; inset: 0; background: url("../../assets/img/brand/grain.png"); background-size: 128px; opacity: .07; mix-blend-mode: overlay; }
+  .mark { position: absolute; font-weight: 900; font-stretch: 125%; letter-spacing: .02em; font-size: 22px; }
+  .micro { position: absolute; font-weight: 600; font-stretch: 112%; letter-spacing: .14em; text-transform: uppercase; font-size: 15px; }
+  .serif { font-family: "Bodoni Moda", serif; font-style: italic; font-weight: 400; }
+  .shadow { position: absolute; border-radius: 50%; filter: blur(26px); }
+  .big { position: absolute; font-weight: 900; line-height: .78; letter-spacing: -.04em; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!-- post-01 : 900×1125 — the cup on gold -->
+<section class="art grain" id="post-01" style="width:900px;height:1125px;background:var(--gold);color:var(--ink)">
+  <div class="mark" style="left:44px;top:42px">CUPISTAN</div>
+  <div class="micro" style="right:44px;top:46px">Nº 02 — İmza</div>
+  <div class="big" style="left:36px;bottom:40px;font-size:228px;font-stretch:125%">CUP</div>
+  <div class="shadow" style="left:300px;top:900px;width:340px;height:60px;background:rgba(80,40,0,.45)"></div>
+  <img src="../../assets/img/products/cup-imza-900.webp" style="left:160px;top:80px;width:620px">
+</section>
+
+<!-- post-02 : 900×900 — waffle macro -->
+<section class="art grain" id="post-02" style="width:900px;height:900px;background:var(--night)">
+  <img src="../../assets/img/products/waffle-klasik-800.webp" style="left:-520px;top:-470px;width:1900px">
+  <div class="micro" style="left:40px;bottom:40px;color:var(--cream)">16 cep / 1 waffle</div>
+</section>
+
+<!-- reel-03 : 800×1422 — shake on cream -->
+<section class="art grain" id="reel-03" style="width:800px;height:1422px;background:var(--cream);color:var(--ink)">
+  <div class="big" style="left:-6px;top:120px;font-size:560px;font-stretch:62%;color:var(--ink)">SHA</div>
+  <div class="big" style="left:-6px;top:560px;font-size:560px;font-stretch:62%;color:var(--ink)">KE</div>
+  <div class="shadow" style="left:300px;top:1250px;width:300px;height:50px;background:rgba(40,20,0,.35)"></div>
+  <img src="../../assets/img/products/shake-cikolata-800.webp" style="left:230px;top:300px;width:600px">
+  <div class="mark" style="left:40px;top:44px">CUPISTAN</div>
+  <div class="serif" style="position:absolute;left:40px;bottom:60px;font-size:54px">Pipet altın.</div>
+</section>
+
+<!-- post-04 : 900×900 — typographic -->
+<section class="art grain" id="post-04" style="width:900px;height:900px;background:var(--cream);color:var(--ink)">
+  <div class="micro" style="left:50%;top:50px;transform:translateX(-50%)">K — Waffle</div>
+  <div class="micro" style="right:44px;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:right center">D — Dondurma</div>
+  <div class="micro" style="left:50%;bottom:50px;transform:translateX(-50%)">G — Tatlı</div>
+  <div class="micro" style="left:44px;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left center">B — İçecek</div>
+  <div style="position:absolute;left:50%;top:50%;width:620px;height:620px;border:1.5px solid rgba(18,12,8,.3);border-radius:50%;transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;left:50%;top:calc(50% - 310px);width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--gold)"></div>
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center">
+    <div class="serif" style="font-size:96px;line-height:.95">Bugün<br>hangi bölge?</div>
+  </div>
+</section>
+
+<!-- post-05 : 900×1125 — three éclairs -->
+<section class="art grain" id="post-05" style="width:900px;height:1125px;background:var(--cream);color:var(--ink)">
+  <div class="big" style="left:40px;top:44px;font-size:150px;font-stretch:125%">EKLER</div>
+  <img src="../../assets/img/products/ekler-cikolata-1200.webp" style="left:-60px;top:240px;width:1000px;transform:rotate(-8deg)">
+  <img src="../../assets/img/products/ekler-fistik-1200.webp" style="left:-20px;top:500px;width:1000px;transform:rotate(-8deg)">
+  <img src="../../assets/img/products/ekler-karamel-1200.webp" style="left:20px;top:760px;width:1000px;transform:rotate(-8deg)">
+  <div class="micro" style="right:44px;bottom:44px">Çikolata / Fıstık / Karamel</div>
+</section>
+
+<!-- reel-06 : 800×1422 — scoops on pistachio -->
+<section class="art grain" id="reel-06" style="width:800px;height:1422px;background:var(--pist);color:var(--ink)">
+  <div class="big" style="left:34px;top:110px;font-size:250px;font-stretch:125%">ÜÇ</div>
+  <div class="big" style="left:34px;top:310px;font-size:250px;font-stretch:125%">TOP</div>
+  <div class="shadow" style="left:240px;top:1240px;width:340px;height:60px;background:rgba(30,40,0,.4)"></div>
+  <img src="../../assets/img/products/dondurma-uclu-900.webp" style="left:90px;top:440px;width:660px">
+  <div class="mark" style="right:40px;top:44px">CUPISTAN</div>
+</section>
+
+<!-- post-07 : 900×900 — Turkish coffee -->
+<section class="art grain" id="post-07" style="width:900px;height:900px;background:var(--night2);color:var(--cream)">
+  <img src="../../assets/img/products/kahve-turk-800.webp" style="left:90px;top:120px;width:720px">
+  <div class="serif" style="position:absolute;left:46px;top:46px;font-size:64px;line-height:1">Orta şekerli.</div>
+  <div class="micro" style="right:44px;bottom:44px;color:var(--gold)">Lokumu yanında</div>
+</section>
+
+<!-- og : 1200×630 -->
+<section class="art grain" id="og" style="width:1200px;height:630px;background:var(--gold);color:var(--ink)">
+  <div class="serif" style="position:absolute;left:48px;top:40px;font-size:46px;line-height:1">Bir bardağa<br>sığan ülke.</div>
+  <div class="micro" style="right:48px;top:48px">Gebze — Kocaeli</div>
+  <img src="../../assets/img/products/cup-imza-600.webp" style="left:760px;top:-10px;width:330px">
+  <div class="big" style="left:34px;bottom:30px;font-size:192px;font-stretch:125%">CUPISTAN</div>
+</section>
+
+<script>
+  window.show = async (id) => {
+    document.querySelectorAll('.art').forEach((a) => a.classList.toggle('on', a.id === id));
+    await document.fonts.ready;
+    await Promise.all([...document.querySelectorAll('#' + id + ' img')].map((i) => i.decode().catch(() => {})));
+    const el = document.getElementById(id);
+    return { w: el.offsetWidth, h: el.offsetHeight };
+  };
+  window.ready = true;
+</script>
+</body>
+</html>

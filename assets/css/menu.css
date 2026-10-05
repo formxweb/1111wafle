@@ -1,0 +1,369 @@
+/* ==========================================================================
+   CUPISTAN — menu
+   Four regions on four edges. The active region is gold, the compass ring
+   turns to face it, the typography takes on the region's character.
+   ========================================================================== */
+
+.menu {
+  --edge: clamp(64px, 6.5vw, 110px);
+  --dir: 1;
+  position: relative;
+  min-height: 100svh;
+  padding: calc(120px + env(safe-area-inset-top, 0px)) var(--edge) 140px;
+  background: var(--night);
+}
+
+/* --------------------------------------------------------------------------
+   Compass — the region navigation
+   -------------------------------------------------------------------------- */
+.compass {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  transition: opacity 0.6s var(--ease-out);
+}
+.menu.is-past .compass { opacity: 0; }
+.menu.is-past .compass__tab { pointer-events: none; }
+
+/* the country's border: a ring that turns to the active region */
+.compass::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(150vh, 130vw);
+  aspect-ratio: 1;
+  border: 1px solid rgba(242, 233, 218, 0.13);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(var(--ring, 0deg));
+  transition: transform 1.4s var(--ease-in-out);
+  background:
+    radial-gradient(circle at 50% 0.55%, var(--gold) 0 7px, rgba(227, 161, 58, 0.25) 8px 16px, transparent 17px);
+}
+.menu[data-active="waffle"] .compass { --ring: 0deg; }
+.menu[data-active="dondurma"] .compass { --ring: 90deg; }
+.menu[data-active="tatli"] .compass { --ring: 180deg; }
+.menu[data-active="icecek"] .compass { --ring: 270deg; }
+
+.compass__tab {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 16px 9px 10px;
+  border-radius: 999px;
+  background: rgba(13, 9, 7, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+  color: rgba(242, 233, 218, 0.5);
+  transition: color 0.5s var(--ease-out);
+}
+.compass__tab--e,
+.compass__tab--w { padding: 16px 9px 10px; }
+.compass__dir {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.625rem;
+  font-weight: 700;
+  font-stretch: 112%;
+  line-height: 1;
+}
+.compass__name {
+  font-size: clamp(0.8rem, 0.7rem + 0.35vw, 1rem);
+  font-weight: 800;
+  font-stretch: 100%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: font-stretch 0.6s var(--ease-out), letter-spacing 0.6s var(--ease-out);
+}
+.compass__tab:hover { color: var(--cream); }
+.compass__tab[aria-selected="true"] { color: var(--gold); }
+.compass__tab[aria-selected="true"] .compass__name { font-stretch: 125%; letter-spacing: 0.08em; }
+.compass__tab[aria-selected="true"] .compass__dir { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+.compass__tab--n { left: 50%; top: calc(6px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); }
+.compass__tab--s { left: 50%; bottom: calc(6px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); }
+.compass__tab--e,
+.compass__tab--w { top: 50%; writing-mode: vertical-rl; }
+.compass__tab--e { right: calc(var(--m) * 0.5); transform: translateY(-50%); }
+.compass__tab--w { left: calc(var(--m) * 0.5); transform: translateY(-50%) rotate(180deg); }
+.compass__tab--e .compass__dir,
+.compass__tab--w .compass__dir { writing-mode: horizontal-tb; transform: rotate(90deg); }
+.compass__tab--w .compass__dir { transform: rotate(-90deg); }
+
+/* without JS the regions are plain anchors and every panel is visible */
+.menu:not(.is-tabs) .panel + .panel { margin-top: 18vh; }
+
+/* --------------------------------------------------------------------------
+   Panel
+   -------------------------------------------------------------------------- */
+.panels { position: relative; }
+
+.panel {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--g);
+  align-items: start;
+  outline: none;
+}
+.panel[hidden] { display: none; }
+
+.panel__head { grid-column: 1 / span 7; }
+.panel__meta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 3vh;
+  color: rgba(242, 233, 218, 0.55);
+}
+.panel__meta span:first-child { color: var(--gold); }
+.panel__title {
+  font-weight: 900;
+  font-stretch: 100%;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.panel__title [data-fit] { display: block; font-size: clamp(4rem, 13vw, 15rem); }
+.panel--dondurma .panel__title { font-stretch: 125%; }
+.panel--tatli .panel__title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.04em;
+  line-height: 0.86;
+}
+.panel--icecek .panel__title { font-stretch: 62%; letter-spacing: -0.02em; }
+.panel__intro {
+  max-width: 26ch;
+  margin-top: 3.5vh;
+  font-size: clamp(1.3rem, 1rem + 1vw, 2rem);
+  line-height: 1.12;
+  color: var(--cream);
+}
+
+.panel__hero {
+  grid-column: 8 / -1;
+  grid-row: 1 / span 3;
+  position: sticky;
+  top: 14vh;
+  margin: 0;
+}
+.panel__hero .slot { aspect-ratio: 1; }
+.panel__hero img { filter: drop-shadow(0 50px 60px rgba(0, 0, 0, 0.6)); }
+.panel__hero.is-swap img { animation: stage-swap 0.7s var(--ease-out); }
+@keyframes stage-swap {
+  from { clip-path: circle(0% at 50% 55%); transform: scale(1.06); }
+  to { clip-path: circle(120% at 50% 50%); transform: none; }
+}
+
+.panel__list {
+  grid-column: 1 / span 7;
+  margin-top: 9vh;
+  counter-reset: item;
+  border-top: 1px solid var(--line-dark);
+}
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.2em minmax(0, 1fr) auto;
+  grid-template-areas:
+    "no name price"
+    "no desc price";
+  column-gap: 16px;
+  align-items: baseline;
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--line-dark);
+  transition: color 0.4s;
+}
+.item__no { grid-area: no; font-size: var(--t-micro); font-weight: 600; color: rgba(242, 233, 218, 0.62); letter-spacing: 0.08em; }
+.item__thumb { display: none; }
+.item__name {
+  grid-area: name;
+  font-size: clamp(1.5rem, 1rem + 1.4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  transition: transform 0.6s var(--ease-out), color 0.4s;
+}
+.item__tag {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 0.35em 0.7em 0.3em;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--ink);
+  font-style: normal;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  transform: translateY(-0.25em);
+}
+.item__desc {
+  grid-area: desc;
+  margin-top: 8px;
+  max-width: 46ch;
+  font-size: var(--t-small);
+  line-height: 1.5;
+  color: rgba(242, 233, 218, 0.62);
+  transition: transform 0.6s var(--ease-out);
+}
+.item__price { grid-area: price; font-size: 1.05rem; align-self: center; transition: color 0.4s; }
+.item.is-hot .item__name,
+.item.is-hot .item__desc { transform: translateX(14px); }
+.item.is-hot .item__name,
+.item.is-hot .item__price { color: var(--gold); }
+
+.panel__flavours { grid-column: 1 / span 7; margin-top: 7vh; }
+.panel__sub { margin-bottom: 18px; color: var(--gold); }
+.panel__sub span { color: rgba(242, 233, 218, 0.5); }
+.flavours { display: flex; flex-wrap: wrap; gap: 10px; }
+.flavour {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 18px 6px 6px;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: var(--t-small);
+  transition: border-color 0.4s, color 0.4s, background-color 0.4s;
+}
+.flavour__img { width: 34px; height: 42px; object-fit: contain; }
+.flavour.is-hot { border-color: var(--gold); color: var(--gold); }
+
+.menu__note {
+  margin-top: 12vh;
+  max-width: 60ch;
+  font-size: var(--t-small);
+  color: rgba(242, 233, 218, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   Panel choreography
+   -------------------------------------------------------------------------- */
+.js .is-tabs .panel .line > span { transform: translate3d(0, 105%, 0); }
+.js .is-tabs .panel.is-in .line > span { transform: none; transition: transform 1s var(--ease-out) 0.05s; }
+.js .is-tabs .panel.is-out .line > span { transform: translate3d(0, -105%, 0); transition: transform 0.42s var(--ease-in-out); }
+
+.is-tabs .panel.is-in .panel__meta,
+.is-tabs .panel.is-in .panel__intro,
+.is-tabs .panel.is-in .item,
+.is-tabs .panel.is-in .flavour,
+.is-tabs .panel.is-in .panel__sub {
+  animation: rise-in 0.9s var(--ease-out) both;
+  animation-delay: calc(0.18s + var(--i, 0) * 60ms);
+}
+.is-tabs .panel.is-in .panel__intro { --i: 1; }
+.is-tabs .panel.is-in .panel__list .item { animation-delay: calc(0.28s + var(--i, 0) * 70ms); }
+.is-tabs .panel.is-in .flavour { animation-delay: calc(0.6s + var(--i, 0) * 50ms); }
+@keyframes rise-in {
+  from { opacity: 0; transform: translate3d(0, 26px, 0); }
+}
+.is-tabs .panel.is-in .panel__hero .slot { animation: stage-in 1.2s var(--ease-out) both 0.1s; }
+@keyframes stage-in {
+  from { clip-path: circle(0% at 50% 60%); transform: translate3d(calc(var(--dir) * 8vw), 0, 0) rotate(calc(var(--dir) * 10deg)); }
+  to { clip-path: circle(120% at 50% 50%); transform: none; }
+}
+.is-tabs .panel.is-out .panel__meta,
+.is-tabs .panel.is-out .panel__intro,
+.is-tabs .panel.is-out .panel__list,
+.is-tabs .panel.is-out .panel__flavours {
+  opacity: 0;
+  transform: translate3d(0, -16px, 0);
+  transition: opacity 0.35s, transform 0.42s var(--ease-in-out);
+}
+.is-tabs .panel.is-out .panel__hero .slot {
+  clip-path: circle(0% at 50% 50%);
+  transform: translate3d(calc(var(--dir) * -6vw), 0, 0);
+  transition: clip-path 0.42s var(--ease-in-out), transform 0.42s var(--ease-in-out);
+}
+
+/* --------------------------------------------------------------------------
+   Finale on the menu: route to the shop
+   -------------------------------------------------------------------------- */
+.finale--menu { min-height: 86svh; }
+.finale__stage--route { align-items: end; min-height: 40vh; }
+.finale__route {
+  display: block;
+  padding: 0 var(--m) 2vh;
+}
+.finale__route-label { display: block; margin-bottom: 2vh; }
+.finale__route-word {
+  display: block;
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: 12vw;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  transition: transform 0.8s var(--ease-out);
+  transform-origin: left bottom;
+}
+.finale__route:hover .finale__route-word { transform: skewX(-6deg); }
+
+/* ==========================================================================
+   Mobile — the compass becomes a thumb-zone bar, swipe to travel
+   ========================================================================== */
+@media (max-width: 767px) {
+  .menu { padding: calc(96px + env(safe-area-inset-top, 0px)) var(--m) calc(120px + env(safe-area-inset-bottom, 0px)); }
+  .compass::before { display: none; }
+  .compass {
+    inset: auto 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+    background: rgba(13, 9, 7, 0.88);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line-dark);
+    pointer-events: auto;
+  }
+  .compass__tab {
+    position: relative;
+    inset: auto !important;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 2px;
+    transform: none !important;
+    writing-mode: horizontal-tb !important;
+    justify-content: center;
+    border-radius: 12px;
+  }
+  .compass__tab .compass__dir { transform: none !important; width: 18px; height: 18px; font-size: 0.5625rem; }
+  .compass__name { font-size: 0.6875rem; letter-spacing: 0.06em; }
+  .compass__tab[aria-selected="true"] .compass__name { font-stretch: 100%; letter-spacing: 0.06em; }
+  .compass__tab[aria-selected="true"] { background: rgba(227, 161, 58, 0.1); }
+
+  .panel { display: block; }
+  .panel__title [data-fit] { font-size: 21vw; }
+  .panel__intro { font-size: 1.35rem; }
+  .panel__hero { position: relative; top: auto; width: 78vw; margin: 4vh auto 0; }
+  .panel__list { margin-top: 4vh; }
+  .item {
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "thumb name price"
+      "thumb desc price";
+    column-gap: 14px;
+    padding: 16px 0;
+  }
+  .item__no { display: none; }
+  .item__thumb { display: block; grid-area: thumb; align-self: center; }
+  .item__thumb img { width: 56px; height: 56px; object-fit: contain; }
+  .item__name { font-size: 1.25rem; }
+  .item__desc { margin-top: 4px; font-size: 0.8125rem; }
+  .item__price { font-size: 0.95rem; }
+  .panel__flavours { margin-top: 5vh; }
+
+  .finale__route-word { font-size: 13.5vw; }
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="tr" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sınır dışı — CUPISTAN</title>
+  <meta name="description" content="Aradığın sayfa Cupistan sınırlarının dışında kaldı.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0d0907">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <style>
+    .lost { position: relative; min-height: 100svh; display: grid; align-content: center; padding: 120px var(--m) 80px; overflow: clip; }
+    .lost__code { font-weight: 900; font-stretch: 125%; font-size: 40vw; line-height: .74; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 1.5px rgba(242,233,218,.35); white-space: nowrap; }
+    .lost__title { margin-top: 4vh; font-size: clamp(2.2rem, 1rem + 4vw, 5rem); line-height: 1; }
+    .lost__text { margin-top: 20px; max-width: 40ch; color: rgba(242,233,218,.7); }
+    .lost__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__logo" href="/" aria-label="CUPISTAN — ana sayfa">CUPISTAN</a>
+    <nav class="nav__links" aria-label="Ana gezinme">
+      <a class="nav__menu" href="/menu.html">Menü</a>
+    </nav>
+  </header>
+  <main class="lost">
+    <p class="lost__code" aria-hidden="true">404</p>
+    <h1 class="lost__title t-serif">Sınır dışı kaldın.</h1>
+    <p class="lost__text">Bu sayfa Cupistan topraklarında değil. Ama bardaklar hâlâ dolu.</p>
+    <p class="lost__actions">
+      <a class="btn" href="/"><span class="btn__label">Ana sayfa</span><span class="btn__arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href="/menu.html"><span class="btn__label">Menü</span><span class="btn__arrow" aria-hidden="true">→</span></a>
+    </p>
+  </main>
+  <div class="grain" aria-hidden="true"></div>
+</body>
+</html>

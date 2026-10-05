@@ -1,0 +1,71 @@
+{
+  "_not": "Tek kaynak: fiyatı veya ürünü burada değiştirin, sonra `node tools/build-menu.mjs` çalıştırın. menu.html ve ana sayfadaki fiyatlar güncellenir.",
+  "currency": "TRY",
+  "categories": [
+    {
+      "id": "waffle",
+      "name": "Waffle",
+      "region": "Kuzey",
+      "compass": "K",
+      "intro": "Ülkenin kurucu üyesi. Dört kenarı çıtır, on altı cebi dolu.",
+      "image": "waffle-klasik",
+      "items": [
+        { "id": "cupistan-cup", "name": "Cupistan Cup", "tag": "İmza", "desc": "Waffle parçaları, bir top dondurma, bitter çikolata. Bardakta, yürürken.", "price": 260, "image": "cup-imza" },
+        { "id": "klasik-waffle", "name": "Klasik Waffle", "desc": "Bitter çikolata ve pudra şekeri. Sade ama iddialı.", "price": 340, "image": "waffle-klasik" },
+        { "id": "fistikli-waffle", "name": "Fıstıklı Waffle", "desc": "Bitter çikolata, bol kırık Antep fıstığı.", "price": 420, "image": "waffle-fistik" },
+        { "id": "karamel-biskuvi-waffle", "name": "Karamel Bisküvi Waffle", "desc": "Karamel sos, bisküvi kırıntısı.", "price": 360, "image": "waffle-karamel" },
+        { "id": "cubukta-waffle", "name": "Çubukta Waffle", "desc": "Çikolataya batırılmış, renkli şekerli. Elde taşınır.", "price": 160, "image": "cubuk-waffle" }
+      ]
+    },
+    {
+      "id": "dondurma",
+      "name": "Dondurma",
+      "region": "Doğu",
+      "compass": "D",
+      "intro": "Ülkenin serin tarafı. Topla, bardağa koy, istersen üstüne sıcak çikolata.",
+      "image": "dondurma-uclu",
+      "items": [
+        { "id": "tek-top", "name": "Tek Top", "desc": "İstediğin aroma, bardakta.", "price": 75, "image": "dondurma-sade" },
+        { "id": "cift-top", "name": "Çift Top", "desc": "İki aroma, üstüne sıcak çikolata.", "price": 140, "image": "dondurma-cift" },
+        { "id": "uc-top-bardak", "name": "Üç Top Bardak", "desc": "Üç aroma, sıcak çikolata. Ülkenin en kalabalık bardağı.", "price": 195, "image": "dondurma-uclu" }
+      ],
+      "flavours": [
+        { "name": "Sade", "image": "dondurma-sade" },
+        { "name": "Antep Fıstığı", "image": "dondurma-fistik" },
+        { "name": "Bitter Çikolata", "image": "dondurma-bitter" },
+        { "name": "Çilek", "image": "dondurma-cilek" },
+        { "name": "Limon", "image": "dondurma-limon" }
+      ]
+    },
+    {
+      "id": "tatli",
+      "name": "Tatlı",
+      "region": "Güney",
+      "compass": "G",
+      "intro": "Ülkenin ağır topları. Ekler, profiterol, brownie.",
+      "image": "profiterol",
+      "items": [
+        { "id": "cikolatali-ekler", "name": "Çikolatalı Ekler", "desc": "Bitter çikolata kaplama, vanilyalı krema.", "price": 95, "image": "ekler-cikolata" },
+        { "id": "fistikli-ekler", "name": "Fıstıklı Ekler", "desc": "Antep fıstığı kaplama, kırık fıstık.", "price": 120, "image": "ekler-fistik" },
+        { "id": "karamelli-ekler", "name": "Karamelli Ekler", "desc": "Karamel kaplama, kremalı iç.", "price": 100, "image": "ekler-karamel" },
+        { "id": "profiterol-cup", "name": "Profiterol Cup", "desc": "Dört top choux, bol çikolata sosu, bardakta.", "price": 180, "image": "profiterol" },
+        { "id": "brownie-dondurma", "name": "Brownie & Dondurma", "desc": "Brownie, bir top sade dondurma, sıcak çikolata.", "price": 165, "image": "brownie" }
+      ]
+    },
+    {
+      "id": "icecek",
+      "name": "İçecek",
+      "region": "Batı",
+      "compass": "B",
+      "intro": "Ülkenin içilecek hali. Soğuk, sıcak, köpüklü.",
+      "image": "shake-cikolata",
+      "items": [
+        { "id": "cikolatali-milkshake", "name": "Çikolatalı Milkshake", "desc": "Krem şanti, çikolata sos, altın pipet.", "price": 190, "image": "shake-cikolata" },
+        { "id": "karamelli-milkshake", "name": "Karamelli Milkshake", "desc": "Krem şanti, karamel sos.", "price": 190, "image": "shake-karamel" },
+        { "id": "cilekli-milkshake", "name": "Çilekli Milkshake", "desc": "Krem şanti, çilek sos.", "price": 190, "image": "shake-cilek" },
+        { "id": "sicak-cikolata", "name": "Sıcak Çikolata", "desc": "Koyu, yoğun, kaşıkla da içilir.", "price": 140, "image": "sicak-cikolata" },
+        { "id": "turk-kahvesi", "name": "Türk Kahvesi", "desc": "Lokumuyla.", "price": 90, "image": "kahve-turk" }
+      ]
+    }
+  ]
+}

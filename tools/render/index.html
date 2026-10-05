@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>CUPISTAN still renderer</title>
+<style>
+  @font-face { font-family: "Archivo"; src: url("../../assets/fonts/archivo-var.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; }
+  body { margin: 0; background: #111; color: #eee; font: 12px/1.4 monospace; }
+</style>
+</head>
+<body>
+<canvas id="c" width="256" height="256"></canvas>
+<script type="module">
+  import { ProductRenderer } from '../../assets/js/gl/renderer.js';
+
+  const cache = new Map();
+
+  // Renders a still in tiles and returns raw RGBA as base64 (bottom-up rows fixed).
+  window.renderStill = async (spec) => {
+    await document.fonts.load('900 150px "Archivo"');
+    const ss = spec.ss || 2;
+    const W = spec.size[0] * ss, H = spec.size[1] * ss;
+    const tile = spec.tile || 256;
+    const key = spec.scene + ':' + (spec.steps || 140);
+    let r = cache.get(key);
+    if (!r) {
+      const canvas = document.createElement('canvas');
+      canvas.width = tile; canvas.height = tile;
+      r = new ProductRenderer(canvas, spec.scene, { steps: spec.steps || 160, shadowSteps: 48, label: true });
+      cache.set(key, r);
+    }
+    r.set({
+      camPos: spec.cam, camTarget: spec.target || [0, 0, 0], fov: spec.fov || 0.55,
+      light: spec.light || [0.6, 0.8, 0.4], p: spec.p || [0, 0, 0, 0], q: spec.q || [1, 1, 0, 0],
+      colA: spec.colA || [0.95, 0.9, 0.8], colB: spec.colB || [0.2, 0.1, 0.05], colC: spec.colC || [0.8, 0.2, 0.2],
+      ground: spec.ground || 0, exposure: spec.exposure || 1, time: 0,
+    });
+    const gl = r.gl;
+    const out = new Uint8Array(W * H * 4);
+    const buf = new Uint8Array(tile * tile * 4);
+    for (let ty = 0; ty < H; ty += tile) {
+      for (let tx = 0; tx < W; tx += tile) {
+        r.render({ offset: [tx, ty], full: [W, H] });
+        gl.readPixels(0, 0, tile, tile, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+        for (let y = 0; y < tile; y++) {
+          const gy = ty + y; if (gy >= H) break;
+          const row = H - 1 - gy; // flip to top-down
+          const n = Math.min(tile, W - tx) * 4;
+          out.set(buf.subarray(y * tile * 4, y * tile * 4 + n), (row * W + tx) * 4);
+        }
+        await new Promise((res) => setTimeout(res, 0));
+      }
+    }
+    let bin = '';
+    const CH = 0x8000;
+    for (let i = 0; i < out.length; i += CH) bin += String.fromCharCode.apply(null, out.subarray(i, i + CH));
+    return { w: W, h: H, data: btoa(bin) };
+  };
+  window.ready = true;
+</script>
+</body>
+</html>
