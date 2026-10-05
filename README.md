@@ -36,6 +36,16 @@ tools/                Geliştirme araçları (yayına yüklenmez)
 
 Derleme adımı yoktur. Dosyalar olduğu gibi yayınlanır.
 
+## Tek dosya ve yayın paketi
+
+```bash
+npm install
+node tools/build-dist.mjs
+```
+
+- `dist/CUPISTAN.html` — **çift tıkla aç.** Ana sayfa + menü, bütün fontlar ve görseller içinde; sunucu ya da internet gerekmez. Sunum ve önizleme için.
+- `dist/CUPISTAN-site.zip` — **sunucuya yükle.** JavaScript tek dosyada birleştirilmiş yayın paketi (içinde `BENI-OKU.txt`).
+
 ## Yerelde çalıştırma
 
 ```bash

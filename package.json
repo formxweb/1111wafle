@@ -6,9 +6,11 @@
   "type": "module",
   "scripts": {
     "serve": "node tools/serve.mjs",
-    "render": "node tools/render/render.mjs"
+    "render": "node tools/render/render.mjs",
+    "dist": "node tools/build-dist.mjs"
   },
   "devDependencies": {
+    "esbuild": "^0.25.12",
     "playwright-core": "^1.56.0",
     "sharp": "^0.34.4"
   }

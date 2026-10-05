@@ -35,9 +35,12 @@ export function initMenu(root) {
   let timer = 0;
 
   const fromHash = () => {
-    const h = decodeURIComponent(location.hash.replace('#', ''));
+    const raw = location.hash || (window.__cupHash ? `#${window.__cupHash}` : '');
+    const h = decodeURIComponent(raw.replace('#', ''));
     return ids.includes(h) ? h : null;
   };
+  // history can be unavailable (sandboxed or srcdoc frames): never let it break the menu
+  const historySafe = (method, ...args) => { try { history[method](...args); } catch { /* ignore */ } };
 
   function select(id, { push = true, focus = false, instant = false } = {}) {
     if (!ids.includes(id) || id === current) return;
@@ -54,7 +57,7 @@ export function initMenu(root) {
     root.dataset.active = id;
     root.style.setProperty('--dir', dir);
     if (focus) tabs[ids.indexOf(id)].focus();
-    if (push) history.pushState({ id }, '', `#${id}`);
+    if (push) historySafe('pushState', { id }, '', `#${id}`);
 
     clearTimeout(timer);
     const enter = () => {
@@ -160,5 +163,5 @@ export function initMenu(root) {
     requestAnimationFrame(() => window.scrollTo(0, 0));
   }
   select(initial, { push: false, instant: true });
-  history.replaceState({ id: initial }, '', location.hash ? `#${initial}` : location.pathname + location.search);
+  historySafe('replaceState', { id: initial }, '', location.hash ? `#${initial}` : location.pathname + location.search);
 }

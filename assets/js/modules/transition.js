@@ -4,7 +4,12 @@ import { prefersReducedMotion } from '../core/env.js';
 
 const KEY = 'cupistan:curtain';
 
+// The single-file preview (tools/build-dist.mjs) hosts each page in a frame
+// and provides its own navigation; everywhere else this is plain location.
+const navigate = (href) => (window.__cupNavigate ? window.__cupNavigate(href) : (location.href = href));
+
 function store(set) {
+  if (set === undefined && window.__cupArrive) return true;
   try {
     if (set === undefined) {
       const v = sessionStorage.getItem(KEY);
@@ -40,9 +45,14 @@ export function initTransition() {
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[data-transition]');
     if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const raw = a.getAttribute('href') || '';
+    if (raw.startsWith('#') || a.target === '_blank') return; // same-page anchors scroll natively
     const url = new URL(a.href, location.href);
-    if (url.origin !== location.origin || a.target === '_blank') return;
-    if (url.pathname === location.pathname && url.hash) return; // same-page anchors scroll natively
+    // relative links are internal by definition; this also holds on file://
+    // where URL origins serialise inconsistently ("null" vs "file://")
+    const absolute = /^([a-z][a-z0-9+.-]*:|\/\/)/i.test(raw);
+    if (absolute && url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.hash) return;
     e.preventDefault();
     const word = curtain.querySelector('.curtain__word');
     if (word && a.dataset.transition) word.textContent = a.dataset.transition;
@@ -50,7 +60,7 @@ export function initTransition() {
     curtain.classList.remove('is-out');
     curtain.classList.add('is-in');
     let done = false;
-    const go = () => { if (!done) { done = true; location.href = url.href; } };
+    const go = () => { if (!done) { done = true; navigate(url.href); } };
     const onEnd = (ev) => {
       if (ev.target !== curtain || ev.propertyName !== 'clip-path') return;
       curtain.removeEventListener('transitionend', onEnd);

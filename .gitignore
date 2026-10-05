@@ -3,3 +3,4 @@ node_modules/
 *.log
 /tools/render/out/
 tools/qa-out/
+dist/
